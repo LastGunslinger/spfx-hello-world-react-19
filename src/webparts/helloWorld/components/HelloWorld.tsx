@@ -1,7 +1,7 @@
+import { escape } from '@microsoft/sp-lodash-subset'
 import * as React from 'react'
 import styles from '../styles/HelloWorld.module.scss'
 import type { IHelloWorldProps } from './IHelloWorldProps'
-import { escape } from '@microsoft/sp-lodash-subset'
 
 export default class HelloWorld extends React.Component<IHelloWorldProps> {
 	public render(): React.ReactElement<IHelloWorldProps> {
@@ -22,7 +22,7 @@ export default class HelloWorld extends React.Component<IHelloWorldProps> {
 					<div>Web part property value: <strong>{escape(description)}</strong></div>
 				</div>
 				<div>
-					<h3>Welcome to SharePoint Framework!</h3>
+					<h3>Welcome to SharePoint Framework! (Now using React 19!)</h3>
 					<p>
 						The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
 					</p>
