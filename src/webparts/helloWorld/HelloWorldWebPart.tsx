@@ -1,4 +1,4 @@
-import { IReadonlyTheme } from '@microsoft/sp-component-base'
+import type { IReadonlyTheme } from '@microsoft/sp-component-base'
 import { Version } from '@microsoft/sp-core-library'
 import {
 	type IPropertyPaneConfiguration,
@@ -6,43 +6,44 @@ import {
 } from '@microsoft/sp-property-pane'
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base'
 import * as strings from 'HelloWorldWebPartStrings'
-import { createElement } from 'react'
+import { StrictMode } from 'react'
 import { type Root, createRoot } from 'react-dom/client'
-import HelloWorld from './components/HelloWorld'
-import { IHelloWorldProps } from './components/IHelloWorldProps'
+import { HelloWorld } from './components/HelloWorld'
 
 export interface IHelloWorldWebPartProps {
 	description: string
 }
 
 export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorldWebPartProps> {
-	private _root: Root | undefined
-	private _isDarkTheme: boolean = false;
-	private _environmentMessage: string = '';
+	#root: Root | undefined
+	#isDarkTheme: boolean = false;
+	#environmentMessage: string = '';
 
-	public render(): void {
-		const element: React.ReactElement<IHelloWorldProps> = createElement(
-			HelloWorld,
-			{
-				description: this.properties.description,
-				isDarkTheme: this._isDarkTheme,
-				environmentMessage: this._environmentMessage,
-				hasTeamsContext: !!this.context.sdks.microsoftTeams,
-				userDisplayName: this.context.pageContext.user.displayName
-			}
-		)
-
-		this._root = createRoot(this.domElement)
-		this._root.render(element)
-	}
-
-	protected onInit(): Promise<void> {
+	protected async onInit(): Promise<void> {
 		return this._getEnvironmentMessage().then(message => {
-			this._environmentMessage = message
+			this.#environmentMessage = message
 		})
 	}
 
-	private _getEnvironmentMessage(): Promise<string> {
+	public render(): void {
+		const rootNode = (
+			// Use React strict mode
+			<StrictMode>
+				<HelloWorld
+					description={this.properties.description}
+					isDarkTheme={this.#isDarkTheme}
+					environmentMessage={this.#environmentMessage}
+					hasTeamsContext={!!this.context.sdks.microsoftTeams}
+					userDisplayName={this.context.pageContext.user.displayName}
+				/>
+			</StrictMode>
+		)
+
+		this.#root = createRoot(this.domElement)
+		this.#root.render(rootNode)
+	}
+
+	private async _getEnvironmentMessage(): Promise<string> {
 		if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
 			return this.context.sdks.microsoftTeams.teamsJs.app.getContext()
 				.then(context => {
@@ -74,7 +75,7 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
 			return
 		}
 
-		this._isDarkTheme = !!currentTheme.isInverted
+		this.#isDarkTheme = !!currentTheme.isInverted
 		const {
 			semanticColors
 		} = currentTheme
@@ -88,10 +89,10 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
 	}
 
 	protected onDispose(): void {
-		this._root?.unmount()
+		this.#root?.unmount()
 	}
 
-	// @ts-expect-error - The type of Version is not resolved correctly outside of React 17. If the version of the application is needed, using this.context.manifest.version is an option that has worked for me
+	// @ts-expect-error - There is a type mismatch here caused by different type definitions of 'Version' in @microsoft/sp-core-library. I normally remove this property and use this.context.manifest.version to get the webpart's current version.
 	protected get dataVersion(): Version {
 		return Version.parse('1.0')
 	}
