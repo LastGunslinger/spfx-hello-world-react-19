@@ -1,10 +1,10 @@
-# spfx-test
+# spfx-hello-world
 
 ## Summary
 
-Short summary on functionality and used technologies.
-
-[picture of the solution in action, if possible]
+A HelloWorld template for SharePoint Framework (SPFx) projects configured to work with React versions > 17. This project demonstrates modern React development practices within the SPFx ecosystem, including dependency management and webpack configuration for React 18+.
+The `tsconfig.json` configuration for this project is very opinionated, since this is what I'm used to working with in my day-to-day,
+but those settings can be changed to suit your needs.
 
 ## Used SharePoint Framework Version
 
@@ -19,20 +19,15 @@ Short summary on functionality and used technologies.
 
 ## Prerequisites
 
-> Any special pre-requisites?
-
-## Solution
-
-| Solution    | Author(s)                                               |
-| ----------- | ------------------------------------------------------- |
-| folder name | Author details (name, company, twitter alias with link) |
+- Node.js version 22 or higher
+- npm or pnpm package manager
+- Basic knowledge of React and SharePoint Framework
 
 ## Version history
 
-| Version | Date             | Comments        |
-| ------- | ---------------- | --------------- |
-| 1.1     | March 10, 2021   | Update comment  |
-| 1.0     | January 29, 2021 | Initial release |
+| Version | Date             | Comments                                  |
+| ------- | ---------------- | ----------------------------------------- |
+| 1.0     | January 6, 2026  | Initial release - React 18+ SPFx template |
 
 ## Disclaimer
 
@@ -44,34 +39,31 @@ Short summary on functionality and used technologies.
 
 - Clone this repository
 - Ensure that you are at the solution folder
-- in the command-line run:
-  - `npm install -g @rushstack/heft`
-  - `npm install`
-  - `heft start`
+- In the command-line run:
+  - `pnpm install`
+  - `pnpm start`
 
-> Include any additional steps as needed.
+The `heft start` command will build the solution and serve it locally. You can then access your SPFx web part and test it with React 18+.
 
 Other build commands can be listed using `heft --help`.
 
 ## Features
 
-Description of the extension that expands upon high-level summary above.
+This template provides a working SPFx project configured for React 18+ development:
 
-This extension illustrates the following concepts:
-
-- topic 1
-- topic 2
-- topic 3
-
-> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
-
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
+- **React 18+ Support**: Modern React dependency configuration that works seamlessly with SPFx
+- **HelloWorld Web Part**: A basic web part demonstrating React component implementation in SharePoint
+- **Heft Build System**: Uses the modern Heft build tool from Microsoft's RushStack project
+- **TypeScript Configuration**: Full TypeScript support with proper type definitions
+- **Development Server**: Local development and debugging capabilities with hot module reloading
+- **Production Ready**: Webpack configuration optimized for production builds and deployment
 
 ## References
 
 - [Getting started with SharePoint Framework](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-developer-tenant)
-- [Building for Microsoft teams](https://docs.microsoft.com/sharepoint/dev/spfx/build-for-teams-overview)
+- [Building for Microsoft Teams](https://docs.microsoft.com/sharepoint/dev/spfx/build-for-teams-overview)
 - [Use Microsoft Graph in your solution](https://docs.microsoft.com/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
 - [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/sharepoint/dev/spfx/publish-to-marketplace-overview)
-- [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
 - [Heft Documentation](https://heft.rushstack.io/)
+- [React Documentation](https://react.dev/)
+- [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
